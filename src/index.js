@@ -9,10 +9,6 @@ divHeader.classList.add("header");
 divHeader.appendChild(h1);
 divHeader.appendChild(p);
 
-document.body.appendChild(divHeader); //--------------------------
-
-// Input Text
-
 const inputName = document.createElement("input");
 inputName.type = "text";
 inputName.placeholder = "First name";
@@ -30,10 +26,6 @@ inputPassword.className = "input";
 
 const divFirstColumnInput = document.createElement("div");
 divFirstColumnInput.classList.add("input-text");
-
-divFirstColumnInput.appendChild(inputName);
-divFirstColumnInput.appendChild(inputEmail);
-divFirstColumnInput.appendChild(inputPassword);
 
 const inputLast = document.createElement("input");
 inputLast.type = "text";
@@ -53,16 +45,20 @@ inputPasswordConfirmation.className = "input";
 const divSecondColumnInput = document.createElement("div");
 divSecondColumnInput.classList.add("input-text");
 
+divFirstColumnInput.appendChild(inputName);
+divFirstColumnInput.appendChild(inputDisplayName);
+divFirstColumnInput.appendChild(inputPassword);
+
 divSecondColumnInput.appendChild(inputLast);
-divSecondColumnInput.appendChild(inputDisplayName);
+divSecondColumnInput.appendChild(inputEmail);
 divSecondColumnInput.appendChild(inputPasswordConfirmation);
 
 const InputTextConteiner = document.createElement("div");
-InputTextConteiner.classList.add("input-text");
+InputTextConteiner.classList.add("column-type");
 
 InputTextConteiner.appendChild(divFirstColumnInput);
 InputTextConteiner.appendChild(divSecondColumnInput);
-//----------------
+
 const radioBuyer = document.createElement("input");
 radioBuyer.type = "radio";
 radioBuyer.id = "buyer";
@@ -95,7 +91,7 @@ radioSeller.id = "seller";
 radioSeller.name = "join";
 
 const labelForRadioSeller = document.createElement("label");
-labelForRadioSeller.for = "buyer";
+labelForRadioSeller.htmlFor = "seller";
 labelForRadioSeller.innerText = "Join As a Creative or Marketplace Seller";
 
 const divSecondRadioButton = document.createElement("div");
