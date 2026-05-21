@@ -25,8 +25,7 @@ const inputPassword = document.createElement("input");
 inputPassword.type = "password";
 inputPassword.placeholder = "Password";
 inputPassword.className = "input";
-inputPassword.id = "password";
-      
+
 const divFirstColumnInput = document.createElement("div");
 divFirstColumnInput.classList.add("input-text");
 
@@ -121,7 +120,6 @@ radioBlock.classList.add("input-radio");
 radioBlock.appendChild(firstRadioBox);
 radioBlock.appendChild(secondRadioBox);
 
-
 const checkBox = document.createElement("input");
 checkBox.type = "checkbox";
 checkBox.id = "allow";
@@ -141,6 +139,7 @@ const button = document.createElement("input");
 button.type = "submit";
 button.value = "Create account";
 button.className = "button";
+button.id = "submit-button";
 
 const formDiv = document.createElement("div");
 formDiv.classList.add("form");
@@ -156,10 +155,28 @@ form.appendChild(formDiv);
 
 document.body.appendChild(form);
 
-//------------------------------------------------------------------------
-
-function collectProps() {
-
-
+// Logic
+class Person {
+  constructor(firstName, lastName, displayName, email) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.displayName = displayName;
+    this.email = email;
+  }
 }
 
+function collectProps(event) {
+  event.preventDefault();
+
+  firstName = document.getElementById("first-name").value;
+  lastName = document.getElementById("last-name").value;
+  displayName = document.getElementById("display-name").value;
+  email = document.getElementById("email").value;
+
+  const person = new Person(firstName, lastName, displayName, email);
+  console.log(person);
+
+  localStorage.setItem(lastName, JSON.stringify(person));
+}
+
+button.addEventListener("click", collectProps);
