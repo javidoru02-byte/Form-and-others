@@ -13,17 +13,20 @@ const inputName = document.createElement("input");
 inputName.type = "text";
 inputName.placeholder = "First name";
 inputName.className = "input";
+inputName.id = "first-name";
 
 const inputEmail = document.createElement("input");
 inputEmail.type = "email";
 inputEmail.placeholder = "Email Address";
 inputEmail.className = "input";
+inputEmail.id = "email";
 
 const inputPassword = document.createElement("input");
 inputPassword.type = "password";
 inputPassword.placeholder = "Password";
 inputPassword.className = "input";
-
+inputPassword.id = "password";
+      
 const divFirstColumnInput = document.createElement("div");
 divFirstColumnInput.classList.add("input-text");
 
@@ -31,11 +34,12 @@ const inputLast = document.createElement("input");
 inputLast.type = "text";
 inputLast.placeholder = "Last name";
 inputLast.className = "input";
-
+inputLast.id = "last-name";
 const inputDisplayName = document.createElement("input");
 inputDisplayName.type = "text";
 inputDisplayName.placeholder = "Display Name";
 inputDisplayName.className = "input";
+inputDisplayName.id = "display-name";
 
 const inputPasswordConfirmation = document.createElement("input");
 inputPasswordConfirmation.type = "password";
@@ -117,7 +121,7 @@ radioBlock.classList.add("input-radio");
 radioBlock.appendChild(firstRadioBox);
 radioBlock.appendChild(secondRadioBox);
 
-//---------
+
 const checkBox = document.createElement("input");
 checkBox.type = "checkbox";
 checkBox.id = "allow";
@@ -151,3 +155,11 @@ const form = document.createElement("form");
 form.appendChild(formDiv);
 
 document.body.appendChild(form);
+
+//------------------------------------------------------------------------
+
+function collectProps() {
+
+
+}
+
