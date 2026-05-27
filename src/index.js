@@ -45,6 +45,10 @@ inputPasswordConfirmation.type = "password";
 inputPasswordConfirmation.placeholder = "Password Confirmation";
 inputPasswordConfirmation.className = "input";
 
+const emailError = document.createElement("p");
+emailError.className = "email-error";
+emailError.id = "email-error";
+
 const divSecondColumnInput = document.createElement("div");
 divSecondColumnInput.classList.add("input-text");
 
@@ -54,6 +58,7 @@ divFirstColumnInput.appendChild(inputPassword);
 
 divSecondColumnInput.appendChild(inputLast);
 divSecondColumnInput.appendChild(inputEmail);
+divSecondColumnInput.appendChild(emailError);
 divSecondColumnInput.appendChild(inputPasswordConfirmation);
 
 const InputTextConteiner = document.createElement("div");
@@ -126,8 +131,7 @@ checkBox.id = "allow";
 
 const checkBoxlabel = document.createElement("label");
 checkBoxlabel.htmlFor = "allow";
-checkBoxlabel.innerText =
-  "Allow Squadhelp to send marketing/promotional offers from time to time";
+checkBoxlabel.innerText = "Allow Squadhelp to send marketing/promotional offers from time to time";
 
 const inputCheckbox = document.createElement("div");
 inputCheckbox.classList.add("input-checkbox");
@@ -156,6 +160,20 @@ form.appendChild(formDiv);
 document.body.appendChild(form);
 
 // Logic
+
+let regemail = /[a-zA-Z0-9._%+-]+@gmail\.com/;
+
+document.getElementById("email").addEventListener("input", (e) => {
+  if (regemail.test(e.target.value)) {
+    emailError.innerText = "";
+    emailError.style.display = "none";
+  } else {
+    emailError.innerText = "Некоректний формат пошти, очікується @gmail.com";
+    emailError.style.display = "block";
+    e.target.style.borderColor = "red";
+  }
+});
+
 class Person {
   constructor(firstName, lastName, displayName, email) {
     this.firstName = firstName;
@@ -168,10 +186,14 @@ class Person {
 function collectProps(event) {
   event.preventDefault();
 
-  firstName = document.getElementById("first-name").value;
-  lastName = document.getElementById("last-name").value;
-  displayName = document.getElementById("display-name").value;
-  email = document.getElementById("email").value;
+  let firstName = document.getElementById("first-name").value;
+  let lastName = document.getElementById("last-name").value;
+  let displayName = document.getElementById("display-name").value;
+  let email = document.getElementById("email").value;
+
+  if (!regemail.test(email)) {
+    return;
+  }
 
   const person = new Person(firstName, lastName, displayName, email);
   console.log(person);

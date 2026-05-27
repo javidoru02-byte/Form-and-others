@@ -100,3 +100,9 @@ h1 {
   border-radius: 2px;
   color: white;
 }
+
+.email-error {
+  color: red;
+  font-size: 11px;
+  display: none;
+}
