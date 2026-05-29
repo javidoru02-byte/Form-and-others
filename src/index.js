@@ -25,6 +25,7 @@ const inputPassword = document.createElement("input");
 inputPassword.type = "password";
 inputPassword.placeholder = "Password";
 inputPassword.className = "input";
+inputPassword.id = "password";
 
 const divFirstColumnInput = document.createElement("div");
 divFirstColumnInput.classList.add("input-text");
@@ -44,10 +45,21 @@ const inputPasswordConfirmation = document.createElement("input");
 inputPasswordConfirmation.type = "password";
 inputPasswordConfirmation.placeholder = "Password Confirmation";
 inputPasswordConfirmation.className = "input";
+inputPasswordConfirmation.id = "password-confirmation";
 
 const emailError = document.createElement("p");
 emailError.className = "email-error";
 emailError.id = "email-error";
+//=========================================================
+const passwordError = document.createElement("p");
+passwordError.className = "password-error";
+passwordError.id = "password-error";
+
+const passwordConfirmationError = document.createElement("p");
+passwordConfirmationError.className = "password-confirmation-error";
+passwordConfirmationError.id = "password-confirmation-error";
+
+//=========================================================
 
 const divSecondColumnInput = document.createElement("div");
 divSecondColumnInput.classList.add("input-text");
@@ -55,11 +67,13 @@ divSecondColumnInput.classList.add("input-text");
 divFirstColumnInput.appendChild(inputName);
 divFirstColumnInput.appendChild(inputDisplayName);
 divFirstColumnInput.appendChild(inputPassword);
+divFirstColumnInput.appendChild(passwordError);
 
 divSecondColumnInput.appendChild(inputLast);
 divSecondColumnInput.appendChild(inputEmail);
 divSecondColumnInput.appendChild(emailError);
 divSecondColumnInput.appendChild(inputPasswordConfirmation);
+divSecondColumnInput.appendChild(passwordConfirmationError);
 
 const InputTextConteiner = document.createElement("div");
 InputTextConteiner.classList.add("column-type");
@@ -170,7 +184,34 @@ document.getElementById("email").addEventListener("input", (e) => {
   } else {
     emailError.innerText = "Некоректний формат пошти, очікується @gmail.com";
     emailError.style.display = "block";
-    e.target.style.borderColor = "red";
+  }
+});
+
+let regpassword = /^(?=.*[A-Z])(?=.*\d)(?=.*[!#$%^&*])[A-Za-z\d!#$%^&*]{8,16}$/;
+
+document.getElementById("password").addEventListener("input", (e) => {
+  if (regpassword.test(e.target.value)) {
+    passwordError.innerText = "";
+    passwordError.style.display = "none";
+  } else {
+    passwordError.innerText =
+      "Пароль поаинен містити від 8 до 16 символів і містити хоча б одну велику літеру, одну цифру і один спеціальний символ (!#$%^&*)";
+    passwordError.style.display = "block";
+  }
+});
+
+let isSamePassword = false;
+
+document.getElementById("password-confirmation").addEventListener("input", (e) => {
+  const passwordValue = document.getElementById("password").value;
+  if (e.target.value === passwordValue) {
+    passwordConfirmationError.innerText = "";
+    passwordConfirmationError.style.display = "none";
+    isSamePassword = true;
+  } else {
+    passwordConfirmationError.innerText = "Паролі не співпадають";
+    passwordConfirmationError.style.display = "block";
+    isSamePassword = false;
   }
 });
 
@@ -192,6 +233,13 @@ function collectProps(event) {
   let email = document.getElementById("email").value;
 
   if (!regemail.test(email)) {
+    return;
+  }
+
+  if (!regpassword.test(document.getElementById("password").value)) {
+    return;
+  }
+  if (!isSamePassword) {
     return;
   }
 

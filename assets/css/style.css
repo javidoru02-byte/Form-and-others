@@ -101,8 +101,18 @@ h1 {
   color: white;
 }
 
-.email-error {
+.email-error,
+.password-error,
+.password-confirmation-error {
   color: red;
   font-size: 11px;
   display: none;
+  border: 1px solid black;
+  padding: 5px;
+  
+}
+
+.password-error,
+.password-confirmation-error{
+  width: 160px;
 }
